@@ -1,24 +1,3 @@
-<script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
-import Layout from "@/layouts/GuestLayout.vue";
-import VideoPlayer from "@/components/VideoPlayer.vue";
-import type { QuizDetails } from "@/composables/useQuizPopup";
-
-defineOptions({ layout: Layout });
-
-const props = defineProps<{
-    lesson: {
-        id: number;
-        title: string;
-        desc: string;
-        logo: string;
-        videoUrl: string;
-        progressBarColor: string;
-        quiz: QuizDetails;
-    };
-}>();
-</script>
-
 <template>
     <Head :title="lesson.title" />
 
@@ -41,3 +20,24 @@ const props = defineProps<{
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import { Head } from "@inertiajs/vue3";
+import Layout from "@/layouts/GuestLayout.vue";
+import VideoPlayer from "@/components/VideoPlayer.vue";
+import type { QuizDetails } from "@/composables/useQuizPopup";
+
+defineOptions({ layout: Layout });
+
+const props = defineProps<{
+    lesson: {
+        id: number;
+        title: string;
+        desc: string;
+        logo: string;
+        videoUrl: string;
+        progressBarColor: string;
+        quiz: QuizDetails;
+    };
+}>();
+</script>

@@ -1,25 +1,3 @@
-<script setup lang="ts">
-import { Head, Link } from "@inertiajs/vue3";
-import Layout from "@/layouts/GuestLayout.vue";
-
-const props = withDefaults(
-    defineProps<{
-        hero?: { image: string; title: string; subtitle: string };
-        lessons?: { id: number; title: string; desc: string }[];
-    }>(),
-    {
-        hero: () => ({
-            image: "",
-            title: "Default Title",
-            subtitle: "Default subtitle",
-        }),
-        lessons: () => [],
-    }
-);
-
-defineOptions({ layout: Layout });
-</script>
-
 <template>
     <Head title="Welcome" />
 
@@ -67,6 +45,28 @@ defineOptions({ layout: Layout });
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import { Head, Link } from "@inertiajs/vue3";
+import Layout from "@/layouts/GuestLayout.vue";
+
+const props = withDefaults(
+    defineProps<{
+        hero?: { image: string; title: string; subtitle: string };
+        lessons?: { id: number; title: string; desc: string }[];
+    }>(),
+    {
+        hero: () => ({
+            image: "",
+            title: "Default Title",
+            subtitle: "Default subtitle",
+        }),
+        lessons: () => [],
+    }
+);
+
+defineOptions({ layout: Layout });
+</script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap");
