@@ -1,0 +1,86 @@
+services:
+    node-modules-publish:
+        container_name: node-modules-publish
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - NODE_VERSION=22
+        image: boris-app
+        working_dir: /app
+        volumes:
+            - ./:/app:cached
+        command: >
+            sh -euc "npm install && npm run build"
+        networks:
+            - default
+
+    vendor-publish:
+        container_name: vendor-publish
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - NODE_VERSION=22
+        image: boris-app
+        working_dir: /app
+        volumes:
+            - ./:/app:cached
+        command: >
+            sh -euc "composer install && php artisan key:generate"
+        networks:
+            - default
+
+    boris-app:
+        container_name: boris-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - NODE_VERSION=22
+        image: boris-app
+        working_dir: /app
+        ports:
+            - "8081:8000"
+            - "4000:4000"
+        volumes:
+            - ./:/app:cached
+        command: >
+            sh -euc "php artisan octane:start --server=swoole --host=0.0.0.0 --port=8000"
+        # command: >
+        #     php -S 0.0.0.0:8000 -t /usr/share/nginx/html/public
+        depends_on:
+            - boris-app-redis
+        networks:
+            - default
+
+    boris-storybook:
+        container_name: boris-storybook
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - NODE_VERSION=22
+        image: boris-storybook
+        working_dir: /app
+        command: npm run storybook
+        ports:
+            - "6006:6006"
+        volumes:
+            - ./:/app:cached
+        depends_on:
+            - boris-app
+        networks:
+            - default
+
+    boris-app-redis:
+        image: redis:7-alpine
+        container_name: boris-app-redis
+        ports:
+            - "6379:6379"
+        networks:
+            - default
+
+networks:
+    default:
+        driver: bridge

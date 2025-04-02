@@ -1,0 +1,17 @@
+{
+    "preset": "psr12",
+    "rules": {
+        "cast_spaces": true,
+        "declare_parentheses": true,
+        "declare_strict_types": true,
+        "lambda_not_used_import": true,
+        "modernize_types_casting": true,
+        "no_blank_lines_after_phpdoc": true,
+        "no_superfluous_phpdoc_tags": true,
+        "ordered_imports": true,
+        "phpdoc_align": true,
+        "phpdoc_scalar": true,
+        "phpdoc_trim": true,
+        "trailing_comma_in_multiline": true
+    }
+}
