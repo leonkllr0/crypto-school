@@ -6,6 +6,8 @@
 
     <title inertia>{{ config('app.name', 'Crypto School') }}</title>
 
+    <meta name="robots" content="noindex, nofollow">
+
     <!-- Viewport tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
